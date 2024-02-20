@@ -1,13 +1,13 @@
 # PaymentApp
 
-PaymentApp is a full-stack web application built with React on the frontend and a backend API built with [your-backend-framework] on the backend. It allows users to manage their account balance, send money to other users, and view transaction history. It includes features such as authentication, a dashboard to display user balance and other users, and a modal for sending money.
+EzPay is a full-stack web application built with React on the frontend and a backend API built with NodeJS on the backend. It allows users to manage their account balance, send money to other users, and view transaction history. It includes features such as authentication, a dashboard to display user balance and other users, and a modal for sending money.
 
 ## Features
 
 - **Authentication:** Users can sign in and sign up securely using email and password.
 - **Dashboard:** View account balance and a list of other users available for money transfers.
 - **Send Money Modal:** Initiate money transfers by entering the recipient and amount in a modal.
-- **Transaction History:** Users can view their transaction history.
+<!-- - **Transaction History:** Users can view their transaction history. -->
 
 ## Technologies Used
 
