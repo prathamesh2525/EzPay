@@ -12,5 +12,5 @@ app.use(express.json())
 app.use("/api/v1", rootRouter)
 
 app.listen(PORT, () => {
-  console.log(`App Listening on https://locakhost:${PORT}`)
+  console.log(`App Listening on http://localhost:${PORT}`)
 })

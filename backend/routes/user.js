@@ -1,6 +1,7 @@
+const express = require("express")
 const zod = require("zod")
 const jwt = require("jsonwebtoken")
-const { User } = require("../db")
+const { User, Account } = require("../db")
 const { authMiddleware } = require("../middleware")
 const userRouter = express.Router()
 
@@ -14,7 +15,7 @@ const signupBody = zod.object({
 userRouter.post("/signup", async (req, res) => {
   const { success } = signupBody.safeParse(req.body)
   if (!success) {
-    return res.statud(411).json({
+    return res.status(411).json({
       message: "Email already taken / Incorrect inputs",
     })
   }
@@ -35,6 +36,14 @@ userRouter.post("/signup", async (req, res) => {
     lastName: req.body.lastName,
   })
   const userId = newUser._id
+
+  // ----------- Created new Account for the User
+
+  await Account.create({
+    userId,
+    balance: Math.floor(Math.random() * 10000) + 1,
+  })
+
   const token = jwt.sign(
     {
       userId,

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-mongoose.connect("mongodb://localhost/ezpay")
+mongoose.connect("mongodb://localhost:27017/ezpay")
 
 const userSchema = new mongoose.Schema({
   username: {
