@@ -115,6 +115,12 @@ userRouter.put("/", authMiddleware, async (req, res) => {
   })
 })
 
+// route to get user info
+userRouter.get("/me", authMiddleware, async (req, res) => {
+  const user = await User.findOne({ _id: req.userId })
+  res.json({ user })
+})
+
 // Route to get users from backend - needed so users can search for their friends and send them money
 
 userRouter.get("/bulk", authMiddleware, async (req, res) => {

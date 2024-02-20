@@ -8,6 +8,7 @@ import axios from "axios"
 const DashboardPage = () => {
   const [userBalance, setUserBalance] = useState(0)
   const [userList, setUserList] = useState([])
+  const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -39,14 +40,14 @@ const DashboardPage = () => {
     }
 
     fetchUserData()
-  }, [])
+  }, [updated])
 
   return (
     <div className="min-h-screen bg-gray-200">
       <div className="container mx-auto p-8 ">
         <h2 className="text-3xl font-bold mb-6">Dashboard</h2>
         <UserBalance balance={userBalance} />
-        <UserList userList={userList} />
+        <UserList userList={userList} setUpdated={setUpdated} />
       </div>
     </div>
   )

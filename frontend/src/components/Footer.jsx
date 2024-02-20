@@ -35,7 +35,8 @@ const Footer = () => {
               localStorage.setItem("token", "")
               setTimeout(() => {
                 navigate("/signin")
-              }, 1500)
+                // window.location.reload(false)
+              }, 700)
             }}
             className="p-2 bg-gray-700 rounded hover:opacity-75"
           >

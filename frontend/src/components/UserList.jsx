@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import SendMoneyModal from "./SendMoneyModal"
 
-const UserList = ({ userList }) => {
+const UserList = ({ userList, setUpdated }) => {
   const [selectedUser, setSelectedUser] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -14,6 +14,7 @@ const UserList = ({ userList }) => {
 
   const closeModal = () => {
     setIsModalOpen(false)
+    setUpdated((s) => !s)
   }
 
   return (

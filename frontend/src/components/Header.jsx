@@ -1,8 +1,10 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import axios from "axios"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [user, setUser] = useState(null)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -11,6 +13,18 @@ const Header = () => {
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get("http://localhost:7878/api/v1/user/me", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      setUser(res.data.user)
+    }
+    fetchUser()
+  }, [])
 
   return (
     <header className="bg-gray-800 text-white p-4 border-b border-gray-700">
@@ -81,22 +95,31 @@ const Header = () => {
         )}
 
         {/* Navigation Links - Hidden on Mobile */}
-        <nav className={`lg:flex space-x-4 ${!isMenuOpen ? "hidden" : ""}`}>
-          <Link
-            to="/signin"
-            className="hover:text-gray-300 "
-            onClick={closeMenu}
-          >
-            Sign In
-          </Link>
-          <Link
-            to="/signup"
-            className="hover:text-gray-300"
-            onClick={closeMenu}
-          >
-            Sign Up
-          </Link>
-        </nav>
+        {user ? (
+          <nav className="flex items-center gap-2">
+            <p className="p-2 px-3 rounded-full bg-gray-700">U</p>
+            <div>
+              Hello <span className="font-bold">{user.firstName}</span>{" "}
+            </div>
+          </nav>
+        ) : (
+          <nav className={`lg:flex space-x-4 ${!isMenuOpen ? "hidden" : ""}`}>
+            <Link
+              to="/signin"
+              className="hover:text-gray-300 "
+              onClick={closeMenu}
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/signup"
+              className="hover:text-gray-300"
+              onClick={closeMenu}
+            >
+              Sign Up
+            </Link>
+          </nav>
+        )}
       </div>
     </header>
   )
