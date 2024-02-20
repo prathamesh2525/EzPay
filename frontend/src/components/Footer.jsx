@@ -1,6 +1,8 @@
 // Footer.jsx
+import { useNavigate } from "react-router-dom"
 
 const Footer = () => {
+  const navigate = useNavigate()
   return (
     <footer className=" w-full bg-gray-800 text-white p-4 border-t border-gray-600">
       <div className="container mx-auto flex justify-between items-center h-16">
@@ -11,7 +13,7 @@ const Footer = () => {
         </div>
 
         {/* Social Media Icons */}
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 items-center">
           <a href="#" className="text-white hover:text-gray-300">
             <svg
               className="h-5 w-5"
@@ -28,6 +30,17 @@ const Footer = () => {
               ></path>
             </svg>
           </a>
+          <button
+            onClick={() => {
+              localStorage.setItem("token", "")
+              setTimeout(() => {
+                navigate("/signin")
+              }, 1500)
+            }}
+            className="p-2 bg-gray-700 rounded hover:opacity-75"
+          >
+            Signout
+          </button>
         </div>
       </div>
     </footer>

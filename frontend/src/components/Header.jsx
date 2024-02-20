@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 
 const Header = () => {
@@ -60,6 +60,7 @@ const Header = () => {
                 ></path>
               </svg>
             </button>
+
             <nav className="flex flex-col items-center pt-16">
               <Link
                 to="/signin"
@@ -74,20 +75,6 @@ const Header = () => {
                 onClick={closeMenu}
               >
                 Sign Up
-              </Link>
-              <Link
-                to="/dashboard"
-                className="text-white py-2 hover:bg-gray-700"
-                onClick={closeMenu}
-              >
-                Dashboard
-              </Link>
-              <Link
-                to="/send"
-                className="text-white py-2 hover:bg-gray-700"
-                onClick={closeMenu}
-              >
-                Send
               </Link>
             </nav>
           </div>
@@ -108,16 +95,6 @@ const Header = () => {
             onClick={closeMenu}
           >
             Sign Up
-          </Link>
-          <Link
-            to="/dashboard"
-            className="hover:text-gray-300"
-            onClick={closeMenu}
-          >
-            Dashboard
-          </Link>
-          <Link to="/send" className="hover:text-gray-300" onClick={closeMenu}>
-            Send
           </Link>
         </nav>
       </div>

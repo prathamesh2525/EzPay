@@ -1,8 +1,9 @@
 // SignupPage.jsx
 
-import  { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { z, object } from "zod"
+import axios from "axios"
 
 const SignupPage = () => {
   // Zod Validation Schema
@@ -27,6 +28,8 @@ const SignupPage = () => {
     lastName: "",
   })
 
+  const navigate = useNavigate()
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prevData) => ({ ...prevData, [name]: value }))
@@ -36,18 +39,29 @@ const SignupPage = () => {
       schema.pick({ [name]: z.string() }).parse({ [name]: value })
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }))
     } catch (error) {
-      setErrors((prevErrors) => ({ ...prevErrors, [name]: error.errors[0] }))
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: error.errors.flatMap((err) => err.message),
+      }))
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     // Validate all fields before submitting
     try {
       schema.parse(formData)
-      // Handle signup logic here (e.g., send data to backend)
-      console.log("Form submitted:", formData)
+      
+      
+      const res = await axios.post("http://localhost:7878/api/v1/user/signup", {
+        username: formData.username,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+      })
+      localStorage.setItem("token", res.data.token)
+      navigate("/dashboard")
     } catch (error) {
       // Handle validation errors
       console.error("Validation error:", error.errors)
