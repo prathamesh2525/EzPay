@@ -33,9 +33,22 @@ EzPay is a full-stack web application built with React on the frontend and a bac
 
 2. **Install Dependencies:**
 
+   Frontend:
+
    ```bash
-   cd PaymentApp
+   cd EzPay
+   cd frontend
+   npm i
+   npm run dev
+   ```
+
+   Backend:
+
+   ```bash
+   cd EzPay
+   cd backend
    npm install
+   npm start
    ```
 
 3. **Run the Application :**
@@ -43,3 +56,20 @@ EzPay is a full-stack web application built with React on the frontend and a bac
    ```bash
    npm start
    ```
+
+# MongoDB Replica Set Docker Setup
+
+This repository provides a Dockerfile to set up a MongoDB replica set. Follow the steps below to get started.
+
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) installed on your machine.
+
+## Setup Instructions
+
+```bash
+docker build -t my-mongodb .
+docker run -d -p 27017:27017 --name my-mongodb-instance my-mongodb
+docker logs my-mongodb-instance
+
+```
